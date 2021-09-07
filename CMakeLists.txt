@@ -5,12 +5,15 @@ enable_testing()
 option(STRING_WIDTH_BUILD_TESTS "Build unit tests" ON)
 option(STRING_WIDTH_BUILD_TOOLS "Build programs in tools/" ON)
 
-if (STRING_WIDTH_BUILD_TESTS OR STRING_WIDTH_BUILD_TOOLS)
-
-  # You need to run git 'git submodule update --init'
+if (STRING_WIDTH_BUILD_TOOLS)
+  # must run 'git submodule update --init'
   add_subdirectory(external/strf strf)
 
-  # You need to manually install ICU libraries in external/icu
+endif (STRING_WIDTH_BUILD_TOOLS)
+
+if (STRING_WIDTH_BUILD_TESTS OR STRING_WIDTH_BUILD_TOOLS)
+
+  # ICU libraries must be manually installed external/icu
   set(icu_dir ${CMAKE_CURRENT_SOURCE_DIR}/external/icu)
   set(icu_lib_dir ${icu_dir}/lib)
   set(icu_include_dir ${icu_dir}/include)
